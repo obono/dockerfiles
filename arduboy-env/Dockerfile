@@ -19,3 +19,6 @@ RUN set -x && \
 	arduino-cli sketch new sample && \
 	arduino-cli compile --fqbn arduboy:avr:arduboy Arduino/sample && \
 	rm -rf Arduino/sample
+
+# Added for version 0.3
+RUN go get -u github.com/cbroglie/mustache/...
