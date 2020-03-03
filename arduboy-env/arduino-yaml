@@ -1,3 +1,0 @@
-board_manager:
-  additional_urls: 
-    - https://arduboy.github.io/board-support/package_arduboy_index.json
