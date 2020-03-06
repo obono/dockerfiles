@@ -4,11 +4,18 @@ set -eu
 
 if [ -z "$DOCKERFILE_PATH" ]
 then
-	DOCKERFILE_PATH_ARG=""
+	file_path_arg=""
 else
-	DOCKERFILE_PATH_ARG="-f $DOCKERFILE_PATH"
+	file_path_arg="-f $DOCKERFILE_PATH"
 fi
+
+image_name_arg=""
+tags=`echo "$DOCKER_TAG" | sed -e 's/,/ /g'`
+for tag in $tags
+do
+	image_name_arg="$image_name_arg -t $DOCKER_REPO:$tag"
+done
 
 docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
              --build-arg VCS_REF=`git rev-parse --short HEAD` \
-             $DOCKERFILE_PATH_ARG -t $IMAGE_NAME .
+             $file_path_arg $image_name_arg .

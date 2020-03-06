@@ -6,11 +6,14 @@ ARG BUILD_DATE
 ARG VCS_REF
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
-	org.label-schema.license="CC0" \
 	org.label-schema.name="obono/arduboy-env" \
-	org.label-schema.vendor="obono" \
+	org.label-schema.description="A build environment for Arduboy(TM) using arduino-cli." \
+	org.label-schema.license="CC0" \
+	org.label-schema.url="https://hub.docker.com/r/obono/arduboy-env" \
+	org.label-schema.vcs-url="https://github.com/obono/dockerfiles" \
 	org.label-schema.vcs-ref=$VCS_REF \
-	org.label-schema.vcs-url="https://github.com/obono/dockerfiles"
+	org.label-schema.vendor="obono" \
+	org.label-schema.schema-version="1.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV MUSTACHE_BIN_URL="https://github.com/cbroglie/mustache/releases/download/v1.0.1/mustache_1.0.1_linux_amd64.tar.gz"
