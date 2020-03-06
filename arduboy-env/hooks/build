@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -eu
+
+if [ -z "$DOCKERFILE_PATH" ]
+then
+	DOCKERFILE_PATH_ARG=""
+else
+	DOCKERFILE_PATH_ARG="-f $DOCKERFILE_PATH"
+fi
+
+docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+             --build-arg VCS_REF=`git rev-parse --short HEAD` \
+             $DOCKERFILE_PATH_ARG -t $IMAGE_NAME .
