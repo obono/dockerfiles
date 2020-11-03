@@ -7,7 +7,9 @@ Various Dockerfiles.
 ## Catalogue
 
 * [obono/arduboy-env](https://hub.docker.com/r/obono/arduboy-env/)
-    * A build environment for Arduboy(TM) using arduino-cli.
+    * A build environment for [Arduboy&trade;](https://arduboy.com/) using arduino-cli.
+* [obono/tinyjoypad-env](https://hub.docker.com/r/obono/tinyjoypad-env/)
+    * A build environment for [TinyJoypad](https://www.tinyjoypad.com/tinyjoypad_attiny85) using arduino-cli.
 
 ## License
 
