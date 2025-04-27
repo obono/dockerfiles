@@ -1,8 +1,3 @@
-[![MicroBadger Version](https://images.microbadger.com/badges/version/obono/tinyjoypad-env:latest.svg)](https://microbadger.com/images/obono/tinyjoypad-env:latest)
-[![MicroBadger Commit](https://images.microbadger.com/badges/commit/obono/tinyjoypad-env:latest.svg)](https://microbadger.com/images/obono/tinyjoypad-env:latest)
-[![MicroBadger Layers](https://img.shields.io/microbadger/layers/obono/tinyjoypad-env:latest.svg)](https://microbadger.com/images/obono/tinyjoypad-env:latest)
-[![MicroBadger Lisence](https://images.microbadger.com/badges/license/obono/tinyjoypad-env:latest.svg)](https://microbadger.com/images/obono/tinyjoypad-env:latest)
-
 This is a build environment for [TinyJoypad](https://www.tinyjoypad.com/tinyjoypad_attiny85) using [arduino-cli](https://github.com/arduino/arduino-cli) based on 'ubuntu' docker image.
 
 You can compile the source code for TinyJoypad platform by the following command.

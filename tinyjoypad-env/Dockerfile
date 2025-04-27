@@ -1,9 +1,8 @@
-FROM ubuntu:focal-20201008
-
-MAINTAINER obono
+FROM ubuntu:noble-20250404
 
 ARG BUILD_DATE
 ARG VCS_REF
+ARG VERSION
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.name="obono/tinyjoypad-env" \
@@ -13,12 +12,13 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.vcs-url="https://github.com/obono/dockerfiles" \
 	org.label-schema.vcs-ref=$VCS_REF \
 	org.label-schema.vendor="obono" \
+	org.label-schema.version=$VERSION \
 	org.label-schema.schema-version="1.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV MUSTACHE_BIN_URL="https://github.com/cbroglie/mustache/releases/download/v1.2.0/mustache_1.2.0_linux_amd64.tar.gz"
+ENV MUSTACHE_BIN_URL="https://github.com/cbroglie/mustache/releases/download/v1.4.0/mustache_1.4.0_linux_amd64.tar.gz"
 ENV ARDUINO_INSTALLER_URL="https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh"
-ENV ARDUINO_ADDITIONAL_URL="http://drazzy.com/package_drazzy.com_index.json"
+ENV ARDUINO_ADDITIONAL_URL="https://drazzy.com/package_drazzy.com_index.json"
 
 RUN set -x && \
 	apt-get update && \

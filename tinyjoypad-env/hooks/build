@@ -10,12 +10,19 @@ else
 fi
 
 image_name_arg=""
+version="1.0"
 tags=`echo "$DOCKER_TAG" | sed -e 's/,/ /g'`
 for tag in $tags
 do
 	image_name_arg="$image_name_arg -t $DOCKER_REPO:$tag"
+	if [ $tag != "latest" ]
+	then
+		version=$tag
+	fi
 done
 
-docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-             --build-arg VCS_REF=`git rev-parse --short HEAD` \
-             $file_path_arg $image_name_arg .
+docker build \
+	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+	--build-arg VCS_REF=`git rev-parse --short HEAD` \
+	--build-arg VERSION=$version \
+	$file_path_arg $image_name_arg .

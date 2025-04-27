@@ -1,24 +1,23 @@
-FROM ubuntu:bionic-20200219
-
-MAINTAINER obono
+FROM ubuntu:noble-20250404
 
 ARG BUILD_DATE
+ARG VERSION
 ARG VCS_REF
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
 	org.label-schema.name="obono/arduboy-env" \
 	org.label-schema.description="A build environment for Arduboy(TM) using arduino-cli." \
-	org.label-schema.license="CC0" \
 	org.label-schema.url="https://hub.docker.com/r/obono/arduboy-env" \
 	org.label-schema.vcs-url="https://github.com/obono/dockerfiles" \
 	org.label-schema.vcs-ref=$VCS_REF \
 	org.label-schema.vendor="obono" \
+	org.label-schema.version=$VERSION \
 	org.label-schema.schema-version="1.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV MUSTACHE_BIN_URL="https://github.com/cbroglie/mustache/releases/download/v1.0.1/mustache_1.0.1_linux_amd64.tar.gz"
+ENV MUSTACHE_BIN_URL="https://github.com/cbroglie/mustache/releases/download/v1.4.0/mustache_1.4.0_linux_amd64.tar.gz"
 ENV ARDUINO_INSTALLER_URL="https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh"
-ENV ARDUINO_ADDITIONAL_URL="https://arduboy.github.io/board-support/package_arduboy_index.json"
+ENV ARDUINO_ADDITIONAL_URL="https://raw.githubusercontent.com/MrBlinky/Arduboy-homemade-package/master/package_arduboy_homemade_index.json"
 
 RUN set -x && \
 	apt-get update && \
@@ -36,15 +35,10 @@ WORKDIR /home/circleci
 
 RUN set -x && \
 	arduino-cli --additional-urls ${ARDUINO_ADDITIONAL_URL} core update-index && \
-	arduino-cli --additional-urls ${ARDUINO_ADDITIONAL_URL} core install arduboy:avr && \
+	arduino-cli --additional-urls ${ARDUINO_ADDITIONAL_URL} core install arduboy-homemade:avr && \
 	arduino-cli core install arduino:avr && \
-	arduino-cli lib install Arduboy && \
-	arduino-cli lib install Arduboy2 && \
-	arduino-cli lib install ArduboyPlaytune && \
-	arduino-cli lib install ArduboyTones && \
-	arduino-cli lib install Arduboy-TinyFont && \
-	sed -i -e "49a 0x10," Arduino/libraries/Arduboy/src/core/core.cpp && \
-	sed -i -e "35a 0x10," Arduino/libraries/Arduboy2/src/Arduboy2Core.cpp && \
+	sed -i -e "128i 0x10," .arduino15/packages/arduboy-homemade/hardware/avr/1.4.0/libraries/Arduboy/src/core/core.cpp && \
+	sed -i -e "116i 0x10," .arduino15/packages/arduboy-homemade/hardware/avr/1.4.0/libraries/Arduboy2/src/Arduboy2Core.cpp && \
 	arduino-cli sketch new sample && \
-	arduino-cli compile --fqbn arduboy:avr:arduboy sample && \
+	arduino-cli compile --fqbn arduboy-homemade:avr:arduboy --build-properties "core=arduboy-core,boot=org" sample && \
 	rm -rf sample
